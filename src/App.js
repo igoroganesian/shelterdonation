@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import DonationForm from './components/DonationForm';
 
-function App() {
+const App = () => {
+  const [donations, setDonations] = useState([]);
+
+  const addDonation = (newDonation) => {
+    setDonations([...donations], newDonation);
+  };
+
+  const handleEditDonation = (index) => {
+
+  };
+
+  const handleDeleteDonation = (index) => {
+    setDonations(donations.filter((_, donationIndex => donationIndex !== index)));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <DonationForm addDonation={addDonation} />
+      <DonationList
+        donations={donations}
+        onEdit={handleEditDonation}
+        onDelete={handleDeleteDonation}
+      />
     </div>
   );
-}
+};
 
 export default App;
